@@ -1,20 +1,3 @@
-Alright — I’m going to **rebuild your README from scratch**, but keep the *actually strong parts* and remove the overengineered / confusing claims.
-
-This version will:
-
-* sound clean + academic (for PES evaluation)
-* align with your **actual results**
-* highlight **cascade modeling clearly (your main strength)**
-* avoid things examiners might question
-
----
-
-# 📄 ✅ **FINAL CLEAN README (USE THIS)**
-
-You can copy this directly 👇
-
----
-
 # **Cascading Failure Prediction in Cloud Systems using Spatio-Temporal Graph Neural Networks**
 
 > **Course:** Interdisciplinary Deep Learning with Graphs
