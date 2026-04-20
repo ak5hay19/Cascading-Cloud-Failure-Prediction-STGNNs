@@ -13,3 +13,6 @@ processed/
 
 .DS_Store
 Thumbs.db
+verify_cascade_labels.py
+cascade_fix_plan.md
+verify_cascade_training.py
