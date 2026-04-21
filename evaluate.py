@@ -261,4 +261,4 @@ print(f"AUROC: {roc_auc:.3f}")
 
 print("\nProject Insight:")
 print("Model successfully captures cascading failure behavior,")
-print("but exhibits low precision due to broad failure prediction across nodes.")
+print("but exhibits low precision due to broad failure prediction across nodes.\n")
