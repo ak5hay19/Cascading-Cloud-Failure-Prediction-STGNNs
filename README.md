@@ -1,14 +1,14 @@
 # **Cascading Failure Prediction in Cloud Systems using Spatio-Temporal Graph Neural Networks**
 
 > **Course:** Interdisciplinary Deep Learning with Graphs
-
 > **Institution:** PES University
 
-> **Team:** Akshay P Shetti, Tarun S, Aadithyaa Kumar, Adarsh R Menon
+> **Team:**
+> Akshay P Shetti, Tarun S, Aadithyaa Kumar, Adarsh R Menon
 
 ---
 
-## 🧠 Overview
+## Overview
 
 Modern cloud infrastructures consist of thousands of interconnected machines.
 Failures in such systems rarely occur in isolation — they **propagate across dependencies**, leading to *cascading failures*.
@@ -21,7 +21,7 @@ This project models cloud infrastructure as a **dynamic graph** and uses a **Spa
 
 ---
 
-## 🎯 Problem Statement
+## Problem Statement
 
 Traditional ML approaches treat machines independently.
 
@@ -39,7 +39,7 @@ Traditional ML approaches treat machines independently.
 
 ---
 
-## 🏗️ Model Architecture
+## Model Architecture
 
 ```
 Dynamic Graph Snapshots (T=6)
@@ -55,33 +55,33 @@ Multi-step Outputs (t+1, t+2, t+3)
 
 ---
 
-### 🔹 Key Components
+### Key Components
 
-* **GraphSAGE**
+**GraphSAGE**
 
-  * Captures local neighborhood influence
-  * Scales to large graphs via neighbor sampling
+* Captures local neighborhood dependencies
+* Scales to large graphs via neighbor sampling
 
-* **GRU**
+**GRU**
 
-  * Models temporal evolution of node states
+* Models temporal evolution of node states
 
-* **Dynamic Edges**
+**Dynamic Edges**
 
-  * Graph structure changes per time step
-  * Captures real-world infrastructure dynamics
+* Graph structure changes per time step
+* Captures real-world infrastructure dynamics
 
-* **Multi-Step Prediction**
+**Multi-Step Prediction**
 
-  * Outputs failure probabilities for:
+* Outputs failure probabilities for:
 
-    * t+1 (immediate risk)
-    * t+2 (short-term spread)
-    * t+3 (cascade stage)
+  * t+1 (immediate risk)
+  * t+2 (short-term spread)
+  * t+3 (cascade stage)
 
 ---
 
-## 📊 Dataset
+## Dataset
 
 * **Source:** Google Borg Cluster Trace
 * **Nodes:** ~4,900 machines
@@ -90,7 +90,7 @@ Multi-step Outputs (t+1, t+2, t+3)
 
 ---
 
-## 📈 Results
+## Results
 
 ### Final Performance (t+3)
 
@@ -103,64 +103,59 @@ Multi-step Outputs (t+1, t+2, t+3)
 
 ---
 
-## 📉 Key Visualizations
+## Key Visualizations
 
-### 🔹 Cascade Progression
+### Cascade Progression
 
 <img src="results/cascade_progression.png" width="500"/>
 
-- Shows how predicted failure probability increases over time  
-- Confirms the model captures **cascade behavior**
+* Shows increasing failure probability over time
+* Confirms the model captures **cascade learning behavior**
 
 ---
 
-### 🔹 Confusion Matrix (t+3)
+### Confusion Matrix (t+3)
 
 <img src="results/confusion_matrix.png" width="500"/>
 
-- Very high recall → most failures detected  
-- High false positives → low precision  
+* Very high recall → most failures detected
+* High false positives → low precision
 
 ---
 
-### 🔹 ROC Curve
+### ROC Curve
 
 <img src="results/roc.png" width="500"/>
 
-- **AUROC ≈ 0.745**
-- Indicates the model learns meaningful patterns  
+* **AUROC ≈ 0.745**
+* Indicates the model learns meaningful patterns
 
 ---
 
-### 🔹 Precision-Recall Curve
+### Precision-Recall Curve
 
 <img src="results/pr.png" width="500"/>
 
-- Highlights trade-off:
-  - High recall  
-  - Low precision  
-- More informative than ROC for imbalanced data  
+* Strong recall, weak precision
+* More informative for imbalanced datasets
 
 ---
 
-### 🔹 t-SNE Visualization (Decision Space)
+### t-SNE Visualization (Decision Space)
 
 <img src="results/tsne.png" width="600"/>
 
-- Nodes projected into 2D learned representation space  
-- Failure nodes (highlighted) are **not tightly clustered**  
-- Indicates failures are **distributed and propagate across the system**
+* Nodes projected into 2D learned representation space
+* Failure nodes (highlighted) are not tightly clustered
+* Indicates failures are distributed across the system
 
-👉 Key takeaway:
+Key takeaway:
 
 > Failures are not isolated events — they emerge from **distributed system dynamics**
 
 ---
 
-
-## 🔥 Key Insight: Cascade Modeling
-
-The most important result:
+## Key Insight: Cascade Modeling
 
 | Time Step | Precision | Recall | F1    |
 | --------- | --------- | ------ | ----- |
@@ -168,38 +163,39 @@ The most important result:
 | t+2       | 0.061     | 0.998  | 0.114 |
 | t+3       | 0.091     | 0.998  | 0.167 |
 
-### ✅ Interpretation
+### Interpretation
 
 * Recall remains consistently high → failures are detected early
 * Precision improves over time → predictions become more accurate
 * F1 increases → model becomes more reliable as cascade evolves
 
-👉 This confirms:
+This confirms:
 
 > The model is not just predicting failures — it is **learning failure propagation dynamics**
 
 ---
 
-## ⚠️ Limitations
+## Limitations
 
 * Low precision (~0.09)
 
-  * Model tends to **overpredict failures**
+  * Model tends to overpredict failures
 * Early-stage prediction (t+1) is weak
-* Threshold sensitivity affects results significantly
+* Strong sensitivity to threshold selection
 
 ---
 
-## 🚀 Future Improvements
+## Future Improvements
 
-* Class imbalance handling (e.g., weighted loss)
+* Class imbalance handling (weighted loss / focal loss)
 * Better threshold calibration
 * Feature engineering for early failure signals
 * Larger hidden dimensions / model capacity
+* Better temporal modeling (e.g., attention-based models)
 
 ---
 
-## ⚙️ How to Run
+## How to Run
 
 ```bash
 pip install -r requirements.txt
@@ -211,7 +207,7 @@ python evaluate.py
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 ├── preprocess.py
@@ -227,23 +223,21 @@ python evaluate.py
 
 ---
 
-## 📌 Conclusion
+## Conclusion
 
-This project demonstrates that:
+This project demonstrates:
 
-* Graph-based models can capture **inter-node dependencies**
+* Graph-based models capture **inter-node dependencies**
 * Temporal modeling enables **failure forecasting**
 * Multi-step prediction reveals **cascade dynamics**
 
-> The model acts as a **cascade detector**, prioritizing failure detection over precision -> a desirable trade-off in critical systems.
+> The model acts as a **cascade detector**, prioritizing failure detection over precision — a desirable trade-off in critical systems.
 
 ---
 
-## 📚 References
+## References
 
 * GraphSAGE (Hamilton et al., 2017)
 * GRU (Cho et al., 2014)
 * Google Borg Dataset
 * Spatio-Temporal GNN literature
-
----
