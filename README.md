@@ -103,6 +103,72 @@ Multi-step Outputs (t+1, t+2, t+3)
 
 ---
 
+## Baseline Comparison
+
+We compare our ST-GNN with a Logistic Regression baseline trained on **raw machine-level features**.
+
+### Results
+
+| Model               | Task                   | Precision | Recall | F1   |
+| ------------------- | ---------------------- | --------- | ------ | ---- |
+| Logistic Regression | Static (ever fail)     | 1.00      | 0.64   | 0.78 |
+| ST-GNN (Ours)       | Temporal (t+3 cascade) | 0.09      | 0.998  | 0.17 |
+
+---
+
+### Interpretation
+
+* **Logistic Regression**
+
+  * Uses only static machine features
+  * Predicts whether a machine will **ever fail**
+  * Achieves **high precision** (very few false positives)
+  * Misses many failures (**lower recall**)
+  * Cannot model:
+
+    * when failures occur
+    * how failures propagate
+    * inter-machine dependencies
+
+* **ST-GNN (Ours)**
+
+  * Models **graph structure + temporal dynamics**
+  * Predicts failures across multiple future steps
+  * Achieves **near-perfect recall**
+  * Captures **cascading failure behavior**
+  * Trades precision for **early and comprehensive detection**
+
+---
+
+### Key Insight
+
+> Logistic Regression answers *“which machines will fail at some point”*,
+> while ST-GNN answers *“when failures occur and how they propagate across the system”*.
+
+---
+
+### Practical Importance (False Negatives)
+
+In real cloud systems:
+
+* **False Negatives (missed failures)** are extremely costly
+* Missing a failure can lead to:
+
+  * service outages
+  * cascading system breakdown
+  * large-scale infrastructure impact
+
+Therefore:
+
+> **High recall is more important than high precision**
+
+* ST-GNN prioritizes **recall (~1.0)** → detects almost all failures
+* Logistic Regression prioritizes **precision** but misses failures
+
+--> This makes ST-GNN more suitable for **failure-critical systems** 
+
+---
+
 ## Key Visualizations
 
 ### Cascade Progression
@@ -146,7 +212,7 @@ Multi-step Outputs (t+1, t+2, t+3)
 <img src="results/tsne.png" width="600"/>
 
 * Nodes projected into 2D learned representation space
-* Failure nodes (highlighted) are not tightly clustered
+* Failure nodes are not tightly clustered
 * Indicates failures are distributed across the system
 
 Key takeaway:
@@ -167,7 +233,7 @@ Key takeaway:
 
 * Recall remains consistently high → failures are detected early
 * Precision improves over time → predictions become more accurate
-* F1 increases → model becomes more reliable as cascade evolves
+* F1 increases → model reliability improves as cascade evolves
 
 This confirms:
 
@@ -180,7 +246,7 @@ This confirms:
 * Low precision (~0.09)
 
   * Model tends to overpredict failures
-* Early-stage prediction (t+1) is weak
+* Early-stage prediction (t+1) is weaker
 * Strong sensitivity to threshold selection
 
 ---
@@ -191,7 +257,7 @@ This confirms:
 * Better threshold calibration
 * Feature engineering for early failure signals
 * Larger hidden dimensions / model capacity
-* Better temporal modeling (e.g., attention-based models)
+* Improved temporal modeling (e.g., attention mechanisms)
 
 ---
 
@@ -215,6 +281,7 @@ python evaluate.py
 ├── train.py
 ├── model.py
 ├── evaluate.py
+├── LogRegrr_Baseline.py
 ├── config.yaml
 ├── processed/
 ├── results/
@@ -231,7 +298,7 @@ This project demonstrates:
 * Temporal modeling enables **failure forecasting**
 * Multi-step prediction reveals **cascade dynamics**
 
-> The model acts as a **cascade detector**, prioritizing failure detection over precision which is a desirable trade-off in critical systems.
+> The ST-GNN acts as a **cascade-aware failure detector**, prioritizing recall over precision which is a desirable trade-off in failure-critical cloud systems.
 
 ---
 
