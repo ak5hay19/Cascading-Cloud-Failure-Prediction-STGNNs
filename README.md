@@ -235,7 +235,7 @@ This project demonstrates that:
 * Temporal modeling enables **failure forecasting**
 * Multi-step prediction reveals **cascade dynamics**
 
-> The model acts as a **cascade detector**, prioritizing detection over precision — a desirable property in failure-critical systems.
+> The model acts as a **cascade detector**, prioritizing failure detection over precision -> a desirable trade-off in critical systems.
 
 ---
 
