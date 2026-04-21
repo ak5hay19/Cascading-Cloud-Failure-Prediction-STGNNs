@@ -143,6 +143,21 @@ Multi-step Outputs (t+1, t+2, t+3)
 
 ---
 
+### 🔹 t-SNE Visualization (Decision Space)
+
+<img src="results/tsne.png" width="600"/>
+
+- Nodes projected into 2D learned representation space  
+- Failure nodes (highlighted) are **not tightly clustered**  
+- Indicates failures are **distributed and propagate across the system**
+
+👉 Key takeaway:
+
+> Failures are not isolated events — they emerge from **distributed system dynamics**
+
+---
+
+
 ## 🔥 Key Insight: Cascade Modeling
 
 The most important result:
