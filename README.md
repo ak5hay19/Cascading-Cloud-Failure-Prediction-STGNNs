@@ -1,7 +1,6 @@
 # **Cascading Failure Prediction in Cloud Systems using Spatio-Temporal Graph Neural Networks**
 
 > **Course:** Interdisciplinary Deep Learning with Graphs
-> **Institution:** PES University
 
 > **Team:**
 > Akshay P Shetti, Tarun S, Aadithyaa Kumar, Adarsh R Menon
